@@ -6,7 +6,7 @@
 #
 Name     : retype
 Version  : 17.6.3
-Release  : 1
+Release  : 2
 URL      : https://pypi.python.org/packages/7b/9b/9630421367e88ccad46ae480980a39185578466f475d0c6d1df97c0be727/retype-17.6.3.tar.gz
 Source0  : https://pypi.python.org/packages/7b/9b/9630421367e88ccad46ae480980a39185578466f475d0c6d1df97c0be727/retype-17.6.3.tar.gz
 Source99 : https://pypi.python.org/packages/7b/9b/9630421367e88ccad46ae480980a39185578466f475d0c6d1df97c0be727/retype-17.6.3.tar.gz.asc
