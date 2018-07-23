@@ -5,11 +5,11 @@
 # Source0 file verified with key 0xB26995E310250568 (lukasz@python.org)
 #
 Name     : retype
-Version  : 17.6.3
-Release  : 12
-URL      : https://pypi.python.org/packages/7b/9b/9630421367e88ccad46ae480980a39185578466f475d0c6d1df97c0be727/retype-17.6.3.tar.gz
-Source0  : https://pypi.python.org/packages/7b/9b/9630421367e88ccad46ae480980a39185578466f475d0c6d1df97c0be727/retype-17.6.3.tar.gz
-Source99 : https://pypi.python.org/packages/7b/9b/9630421367e88ccad46ae480980a39185578466f475d0c6d1df97c0be727/retype-17.6.3.tar.gz.asc
+Version  : 17.12.0
+Release  : 13
+URL      : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
+Source99 : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz.asc
 Summary  : Re-apply types from .pyi stub files to your codebase.
 Group    : Development/Tools
 License  : MIT
@@ -18,6 +18,7 @@ Requires: retype-python3
 Requires: retype-python
 Requires: click
 Requires: typed-ast
+BuildRequires : buildreq-distutils3
 BuildRequires : click
 BuildRequires : pbr
 BuildRequires : pip
@@ -62,14 +63,14 @@ python3 components for the retype package.
 
 
 %prep
-%setup -q -n retype-17.6.3
+%setup -q -n retype-17.12.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530378053
+export SOURCE_DATE_EPOCH=1532307578
 python3 setup.py build -b py3
 
 %check
