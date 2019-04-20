@@ -6,7 +6,7 @@
 #
 Name     : retype
 Version  : 17.12.0
-Release  : 14
+Release  : 15
 URL      : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
 Source99 : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz.asc
