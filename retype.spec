@@ -6,25 +6,21 @@
 #
 Name     : retype
 Version  : 17.12.0
-Release  : 15
+Release  : 16
 URL      : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
 Source99 : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz.asc
 Summary  : Re-apply types from .pyi stub files to your codebase.
 Group    : Development/Tools
 License  : MIT
-Requires: retype-bin
-Requires: retype-python3
-Requires: retype-python
+Requires: retype-bin = %{version}-%{release}
+Requires: retype-python = %{version}-%{release}
+Requires: retype-python3 = %{version}-%{release}
 Requires: click
-Requires: typed-ast
+Requires: typed_ast
 BuildRequires : buildreq-distutils3
 BuildRequires : click
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python3-dev
-BuildRequires : setuptools
-BuildRequires : typed-ast
+BuildRequires : typed_ast
 
 %description
 ======
@@ -47,7 +43,7 @@ bin components for the retype package.
 %package python
 Summary: python components for the retype package.
 Group: Default
-Requires: retype-python3
+Requires: retype-python3 = %{version}-%{release}
 
 %description python
 python components for the retype package.
@@ -70,8 +66,14 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532307578
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1560300806
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -79,8 +81,9 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
