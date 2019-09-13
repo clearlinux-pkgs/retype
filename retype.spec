@@ -5,12 +5,12 @@
 # Source0 file verified with key 0xB26995E310250568 (lukasz@python.org)
 #
 Name     : retype
-Version  : 17.12.0
-Release  : 17
-URL      : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz
-Source99 : https://files.pythonhosted.org/packages/6e/da/ca9f5560f051d2ed79a52de1170903e3ff8ad011cff56c65abfcff38d372/retype-17.12.0.tar.gz.asc
-Summary  : Re-apply types from .pyi stub files to your codebase.
+Version  : 19.9.0
+Release  : 18
+URL      : https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz
+Source1 : https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz.asc
+Summary  : re-apply types from .pyi stub files to your codebase
 Group    : Development/Tools
 License  : MIT
 Requires: retype-bin = %{version}-%{release}
@@ -20,17 +20,16 @@ Requires: click
 Requires: typed_ast
 BuildRequires : buildreq-distutils3
 BuildRequires : click
+BuildRequires : pluggy
+BuildRequires : py-python
+BuildRequires : pytest
+BuildRequires : tox
 BuildRequires : typed_ast
+BuildRequires : virtualenv
 
 %description
-======
-        
-        |Build Status|
-        
-        Re-apply type annotations from .pyi stubs to your codebase.
-        
-        Usage
-        -----
+# retype
+[![Build Status](https://dev.azure.com/ambv/retype/_apis/build/status/ambv.retype?branchName=master)](https://dev.azure.com/ambv/retype/_build/latest?definitionId=1&branchName=master)
 
 %package bin
 Summary: bin components for the retype package.
@@ -59,14 +58,15 @@ python3 components for the retype package.
 
 
 %prep
-%setup -q -n retype-17.12.0
+%setup -q -n retype-19.9.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1560300806
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1568384561
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
@@ -75,11 +75,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-PYTHONPATH=%{buildroot}/usr/lib/python3.7/site-packages python3 setup.py test
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
@@ -90,8 +85,6 @@ echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/mypy/typeshed/third_party/3.6/retype.pyi
-/usr/lib/mypy/typeshed/third_party/3.6/retype_hgext.pyi
 
 %files bin
 %defattr(-,root,root,-)
