@@ -6,7 +6,7 @@
 #
 Name     : retype
 Version  : 19.9.0
-Release  : 18
+Release  : 19
 URL      : https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz
 Source1 : https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz.asc
@@ -14,9 +14,11 @@ Summary  : re-apply types from .pyi stub files to your codebase
 Group    : Development/Tools
 License  : MIT
 Requires: retype-bin = %{version}-%{release}
+Requires: retype-license = %{version}-%{release}
 Requires: retype-python = %{version}-%{release}
 Requires: retype-python3 = %{version}-%{release}
 Requires: click
+Requires: pathspec
 Requires: typed_ast
 BuildRequires : buildreq-distutils3
 BuildRequires : click
@@ -34,9 +36,18 @@ BuildRequires : virtualenv
 %package bin
 Summary: bin components for the retype package.
 Group: Binaries
+Requires: retype-license = %{version}-%{release}
 
 %description bin
 bin components for the retype package.
+
+
+%package license
+Summary: license components for the retype package.
+Group: Default
+
+%description license
+license components for the retype package.
 
 
 %package python
@@ -65,7 +76,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1568384561
+export SOURCE_DATE_EPOCH=1568387005
 # -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
@@ -78,6 +89,8 @@ python3 setup.py build
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/retype
+cp LICENSE %{buildroot}/usr/share/package-licenses/retype/LICENSE
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -89,6 +102,10 @@ echo ----[ mark ]----
 %files bin
 %defattr(-,root,root,-)
 /usr/bin/retype
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/retype/LICENSE
 
 %files python
 %defattr(-,root,root,-)
