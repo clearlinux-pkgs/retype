@@ -1,5 +1,5 @@
 PKG_NAME := retype
-URL = https://files.pythonhosted.org/packages/2e/d1/37b8d4f29f1684a36a660b905401d3fedabdfa6af89a885d34bce31cf149/retype-19.9.0.tar.gz
+URL = https://files.pythonhosted.org/packages/c0/0f/9c896ff833df93389aec01768d40a39567f9abcce8f4318e8139e50e8726/retype-20.10.0.tar.gz
 ARCHIVES = 
 
 include ../common/Makefile.common
