@@ -4,7 +4,7 @@
 #
 Name     : retype
 Version  : 21.10.0
-Release  : 38
+Release  : 39
 URL      : https://files.pythonhosted.org/packages/d2/bf/15e258306312f535da6c3b1e0f1387c9dc6809c16368d808418e0c4b899f/retype-21.10.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/d2/bf/15e258306312f535da6c3b1e0f1387c9dc6809c16368d808418e0c4b899f/retype-21.10.0.tar.gz
 Summary  : re-apply types from .pyi stub files to your codebase
